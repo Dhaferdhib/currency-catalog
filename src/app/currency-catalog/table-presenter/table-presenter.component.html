@@ -1,0 +1,33 @@
+<div class="container" style="text-align:center">
+  <h1>
+    Available currencies
+  </h1>
+</div>
+  
+<table>
+  <tr></tr>
+  <tr class="row">
+    <th class="col-xs-6 col-sm-3 col-md-2" *ngFor="let currency of currencyListObservable | async">
+      <a routerLink="/currency/{{currency.id}}"> ID:{{currency.id | nullable}}
+        Type:{{currency.attributes.code | nullable}}
+        Symbol:{{currency.attributes.symbol | nullable}} </a></th>
+
+  </tr>
+</table>
+
+<input type="text" class="form-control" (input)="onFilterValueChange($event.target.value)"/> 
+
+
+<select (change)="onFilterCriteriaChange($event.target.value)">
+    <option value="ID">ID</option>
+    <option value="CODE">Code</option>
+    <option value="NOME">Name</option>
+    <option value="TYPE">Type</option>
+  </select>
+
+
+  <select (change)="onPageSizeChange($event.target.value)">
+      <option value="2">2</option>
+      <option value="5" selected>5</option>
+      <option value="10">10</option>
+    </select>
