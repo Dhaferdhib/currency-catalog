@@ -12,7 +12,7 @@ export class TablePresenterComponent implements OnInit {
 
   constructor(private currencyService: CurrencyServiceService) { }
   filterValue: string = '';
-  filterCriteria: string = '';
+  filterCriteria: string = 'ID';
   pageSize: number = 5;
   pageNumber: number = 1;
 
@@ -23,18 +23,22 @@ export class TablePresenterComponent implements OnInit {
   }
 
   onFilterValueChange(recentFilterValue: string): void {
+    console.log('onFilterValueChange', recentFilterValue);
     this.filterValue = recentFilterValue;
     this.reloadCurrentList();
   }
 
   onFilterCriteriaChange(recentFilterCriteria: string): void {
+    console.log('onFilterValueChange', recentFilterCriteria);
     this.filterCriteria = recentFilterCriteria;
     this.reloadCurrentList();
   }
 
   onPageSizeChange(recentPageSizeValue: number):void {
+    console.log('onPageSizeChange', recentPageSizeValue);
     this.pageSize =recentPageSizeValue;
     this.reloadCurrentList();
+
   }
 
   reloadCurrentList (): void {

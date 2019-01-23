@@ -1,33 +1,48 @@
-<div class="container" style="text-align:center">
+<div class="container-fluid" style="text-align:center">
   <h1>
     Available currencies
   </h1>
+
+
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-3 col-md-2" *ngFor="let currency of currencyListObservable | async">
+      <app-currency-item [currency]="currency"></app-currency-item>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="form-group">
+      <div class="col-md-1">
+        <select class="form-control" (change)="onFilterCriteriaChange($event.target.value)">
+          <option value="ID">ID</option>
+          <option value="CODE">Code</option>
+          <option value="NAME">Name</option>
+          <option value="TYPE">Type</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <input type="text" class="form-control" (input)="onFilterValueChange($event.target.value)" />
+    </div>
+
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-md-2 form-group">
+      <label for="sel1">Select page size:</label>
+      <select class="form-control" (change)="onPageSizeChange($event.target.value)">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="5" selected>5</option>
+        <option value="10">10</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- end container-->
 </div>
-  
-<table>
-  <tr></tr>
-  <tr class="row">
-    <th class="col-xs-6 col-sm-3 col-md-2" *ngFor="let currency of currencyListObservable | async">
-      <a routerLink="/currency/{{currency.id}}"> ID:{{currency.id | nullable}}
-        Type:{{currency.attributes.code | nullable}}
-        Symbol:{{currency.attributes.symbol | nullable}} </a></th>
-
-  </tr>
-</table>
-
-<input type="text" class="form-control" (input)="onFilterValueChange($event.target.value)"/> 
-
-
-<select (change)="onFilterCriteriaChange($event.target.value)">
-    <option value="ID">ID</option>
-    <option value="CODE">Code</option>
-    <option value="NOME">Name</option>
-    <option value="TYPE">Type</option>
-  </select>
-
-
-  <select (change)="onPageSizeChange($event.target.value)">
-      <option value="2">2</option>
-      <option value="5" selected>5</option>
-      <option value="10">10</option>
-    </select>

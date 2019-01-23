@@ -6,13 +6,15 @@ import { AppRoutingModule } from './/app-routing.module';
 import { TablePresenterComponent } from './currency-catalog/table-presenter/table-presenter.component';
 import { CurrencyDetailsComponent } from './currency-catalog/currency-details/currency-details.component';
 import { NullablePipe } from './currency-catalog/pipes/nullable.pipe';
+import { CurrencyItemComponent } from './currency-catalog/currency-item/currency-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TablePresenterComponent,
     CurrencyDetailsComponent,
-    NullablePipe
+    NullablePipe,
+    CurrencyItemComponent
  ],
   imports: [
     NgbModule.forRoot(),
