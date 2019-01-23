@@ -1,0 +1,14 @@
+<ng-container *ngIf="currency; else notAvailable">
+  <h1>{{currency.id }}</h1>
+  <ul>
+    <li>code: {{currency.attributes.code | nullable}}</li>
+    <li>name: {{currency.attributes.name | nullable}}</li>
+    <li>currency_type: {{currency.attributes.currency_type | nullable}}</li>
+    <li>currency_iso_numeric: {{currency.attributes.currency_iso_numeric | nullable}}</li>
+    <li>currency_iso_alpha3: {{currency.attributes.currency_iso_alpha3 | nullable}}</li>
+  </ul>
+</ng-container>
+
+<ng-template #notAvailable>
+        The data that you are looking for is not availble ... 
+</ng-template>
