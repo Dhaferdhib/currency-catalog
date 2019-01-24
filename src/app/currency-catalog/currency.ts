@@ -11,3 +11,9 @@ export class Currency{
         category: string;
     }
 }
+
+export class TableData {
+    data : Currency [];
+    totalElements : number;
+    lastIndex: number;
+}
