@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Currency } from './currency';
+import { Currency, TableData } from './currency';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -10,16 +10,25 @@ export class CurrencyServiceService {
 
   constructor() { }
 
-  getAllCurrencies(): Observable<Currency[]> {
-    return of(this.mockList);
+  getAllCurrencies(): Observable<TableData> {
+    return of({
+      data: this.mockList, 
+      totalElements: this.mockList.length,
+      lastIndex : 0
+    });
   }
 
 
-  getFiltredAndPaginatedCurrencies(size: number = 10, page: number = 1, filterCriteria: String = '', filterValue: string = ''): Observable<Currency[]> {
+  getFiltredAndPaginatedCurrencies(size: number = 10, page: number = 1, filterCriteria: String = '', filterValue: string = ''): Observable<TableData> {
     let filtredAndPaginatedData = this.mockList;
+    let filterDataLength = 0;
     //page and size should be greated than zero
     if (size <= 0 || page <= 0)
-      return of([]);
+      return of({
+        data: [],
+        totalElements: filterDataLength,
+        lastIndex : 0
+      });
     //filter data using the criteria
     if (filterValue != '' && filterCriteria != '') {
       if (filterCriteria != '') {
@@ -35,10 +44,15 @@ export class CurrencyServiceService {
         }
       }
     }
+    filterDataLength = filtredAndPaginatedData.length;
 
     //get the first values for the filtred list
     filtredAndPaginatedData = filtredAndPaginatedData.slice((page - 1) * size, page * size);
-    return of(filtredAndPaginatedData);
+    return of({
+      data: filtredAndPaginatedData,
+      totalElements : filterDataLength,
+      lastIndex: filterDataLength % size === 0 ? (filterDataLength / size) : (((filterDataLength - (filterDataLength % size))  / size)+ 1)  
+    });
   }
 
   getCurrencyById(id: string): Observable<Currency>{

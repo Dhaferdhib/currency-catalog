@@ -6,7 +6,7 @@
 
 
   <div class="row">
-    <div class="col-xs-6 col-sm-3 col-md-2" *ngFor="let currency of currencyListObservable | async">
+    <div class="col-xs-6 col-sm-3 col-md-2" *ngFor="let currency of (currencyListObservable|async).data">
       <app-currency-item [currency]="currency"></app-currency-item>
     </div>
   </div>
@@ -43,6 +43,20 @@
       </select>
     </div>
   </div>
+
+  <nav aria-label="Page navigation example">
+    <ul *ngIf="lastIndex > 1" class="pagination">
+      <li  class="page-item" (click)="onPageChanged(1)" *ngIf="pageNumber != 0 && pageNumber ===1 "><a>&#60;&#60;</a></li>
+      <li (click)="onPageChanged(pageNumber - 1)" *ngIf="pageNumber >1" class="page-item"><a>Previous</a></li>
+      <li (click)="onPageChanged(pageNumber - 1)" *ngIf="pageNumber >1" class="page-item"><a>{{pageNumber - 1}}</a></li>
+      <li class="page-item" style="color:red"><a>{{pageNumber}}</a></li>
+      <li (click)="onPageChanged(pageNumber + 1)" *ngIf="lastIndex > pageNumber" class="page-item"><a>{{pageNumber + 1}}</a></li>
+      <li (click)="onPageChanged(pageNumber + 1)" *ngIf="lastIndex != (pageNumber)" class="page-item"><a>Next</a></li>
+
+      <li (click)="onPageChanged(lastIndex)" *ngIf="lastIndex != pageNumber" class="page-item"><a>&#62;&#62;</a></li>
+
+    </ul>
+  </nav>
 
   <!-- end container-->
 </div>
